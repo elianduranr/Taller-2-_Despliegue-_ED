@@ -19,7 +19,7 @@ server = app.server
 app.config.suppress_callback_exceptions = True
 
 
-# Load data from csv
+# Load data from csv and keep the index sorted by time
 def load_data():
     data = pd.read_csv("datos_energia.csv")
     data["time"] = pd.to_datetime(data["time"])
