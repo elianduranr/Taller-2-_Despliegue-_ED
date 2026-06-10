@@ -8,6 +8,13 @@ import pandas as pd
 import datetime as dt
 
 
+COLOR_DEMANDA = "#2563eb"
+COLOR_PROYECCION = "#f97316"
+COLOR_INTERVALO = "#64748b"
+COLOR_RELLENO_INTERVALO = "rgba(37, 99, 235, 0.14)"
+COLOR_TEXTO_GRAFICO = "#1f2937"
+COLOR_GRILLA = "#cbd5e1"
+
 
 app = dash.Dash(
     __name__,
@@ -41,21 +48,21 @@ def plot_series(data, initial_date, proy):
             x=data_plot.index,
             y=data_plot['AT_load_actual_entsoe_transparency'],
             mode='lines',
-            line=dict(color="#188463"),
+            line=dict(color=COLOR_DEMANDA),
         ),
         go.Scatter(
             name='Proyección',
             x=data_plot.index,
             y=data_plot['forecast'],
             mode='lines',
-            line=dict(color="#bbffeb",),
+            line=dict(color=COLOR_PROYECCION),
         ),
         go.Scatter(
             name='Upper Bound',
             x=data_plot.index,
             y=data_plot['Upper bound'],
             mode='lines',
-            marker=dict(color="#444"),
+            marker=dict(color=COLOR_INTERVALO),
             line=dict(width=0),
             showlegend=False
         ),
@@ -63,10 +70,10 @@ def plot_series(data, initial_date, proy):
             name='Lower Bound',
             x=data_plot.index,
             y=data_plot['Lower bound'],
-            marker=dict(color="#444"),
+            marker=dict(color=COLOR_INTERVALO),
             line=dict(width=0),
             mode='lines',
-            fillcolor="rgba(242, 255, 251, 0.3)",
+            fillcolor=COLOR_RELLENO_INTERVALO,
             fill='tonexty',
             showlegend=False
         )
@@ -85,9 +92,9 @@ def plot_series(data, initial_date, proy):
         hovermode="x"
     )
     #fig = px.line(data2, x='local_timestamp', y="Demanda total [MW]", markers=True, labels={"local_timestamp": "Fecha"})
-    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="#2cfec1")
-    fig.update_xaxes(showgrid=True, gridwidth=0.25, gridcolor='#7C7C7C')
-    fig.update_yaxes(showgrid=True, gridwidth=0.25, gridcolor='#7C7C7C')
+    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color=COLOR_TEXTO_GRAFICO)
+    fig.update_xaxes(showgrid=True, gridwidth=0.25, gridcolor=COLOR_GRILLA)
+    fig.update_yaxes(showgrid=True, gridwidth=0.25, gridcolor=COLOR_GRILLA)
     #fig.update_traces(line_color='#2cfec1')
 
     return fig
